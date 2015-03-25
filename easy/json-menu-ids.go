@@ -1,16 +1,16 @@
 package main
 
 import (
-       "os"
-       "fmt"
-       "log"
-       "bufio"
-       "regexp"
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"regexp"
 )
 
 /*
 Description:
-You have JSON string which describes a menu. Calculate the SUM of 
+You have JSON string which describes a menu. Calculate the SUM of
 IDs of all "items" in the case a "label" exists for an item.
 
 Input:
@@ -22,17 +22,17 @@ We can only add the ID if there is a label for it. We can use Regex since it
 can easily pick out a label with an ID.
 */
 func main() {
-     file, err := os.Open(os.Args[1])
-     if err != nil {
-     	  log.Fatal(err)
-     }
-     defer file.Close()
+	file, err := os.Open(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
 
-     //We are going to assume I know how to write an regex
-     reg, _ := regexp.Compile("Label [0-9]+")
-     scanner := bufio.NewScanner(file)
-     for scanner.Scan() {
-     	 line := scanner.Text()
-     	 fmt.Println(reg.Split(line,-1))
-     }
+	//We are going to assume I know how to write an regex
+	reg, _ := regexp.Compile("Label [0-9]+")
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		fmt.Println(reg.Split(line, -1))
+	}
 }
